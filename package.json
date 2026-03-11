@@ -1,0 +1,33 @@
+{
+  "name": "village-backend",
+  "version": "1.0.0",
+  "description": "Built with Node, Express, Mongoose and JWT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.js",
+    "dev": "node --watch ./src/index.js",
+    "db:seed": "",
+    "db:wipe": "",
+    "db:reset": "npm run db:wipe && npm run db:seed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/The-Village-Wellness-App/village-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/The-Village-Wellness-App/village-backend/issues"
+  },
+  "homepage": "https://github.com/The-Village-Wellness-App/village-backend#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.3.0"
+  }
+}
