@@ -1,4 +1,4 @@
-const log = require('smallog');
+const log = require("smallog");
 
 // Import the server from server.js
 const { app } = require("./server.js");
