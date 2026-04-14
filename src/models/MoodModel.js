@@ -14,22 +14,6 @@ const MoodSchema = new mongoose.Schema(
       min: 0,
       max: 10,
     },
-    mood: {
-      type: String,
-      enum: [
-        "ecstatic",
-        "happy",
-        "content",
-        "calm",
-        "neutral",
-        "low",
-        "sad",
-        "distressed",
-        "angry",
-        "numb",
-      ],
-      required: true,
-    },
     optional_text: {
       type: String,
       trim: true,
