@@ -17,6 +17,7 @@ const PainSchema = new mongoose.Schema(
     location: {
       type: String,
       enum: [
+        "all_over",
         "head",
         "neck",
         "throat",
