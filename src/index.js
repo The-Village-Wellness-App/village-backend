@@ -1,9 +1,5 @@
 const log = require("smallog");
-
-// Import the server from server.js
 const { app } = require("./server.js");
-
-// Load up environment variables
 const { loadEnvFile } = require("node:process");
 
 try {
