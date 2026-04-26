@@ -27,6 +27,10 @@ app.get("/", (request, response) => {
   });
 });
 
+// Attach our controller routers to the server!
+const {userRouter} = require("./controllers/UserRouter.js");
+app.use("/users", userRouter); 
+
 module.exports = {
   app,
 };
