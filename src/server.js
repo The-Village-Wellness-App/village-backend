@@ -29,7 +29,13 @@ app.get("/", (request, response) => {
 
 // Attach our controller routers to the server!
 const {userRouter} = require("./controllers/UserRouter.js");
-app.use("/users", userRouter); 
+const {moodRouter} = require("./controllers/MoodRouter.js");
+const {painRouter} = require("./controllers/PainRouter.js");
+const {eventRouter} = require("./controllers/EventRouter.js");
+app.use("/users", userRouter);
+app.use("/moods", moodRouter);
+app.use("/pains", painRouter);
+app.use("/events", eventRouter);
 
 module.exports = {
   app,
