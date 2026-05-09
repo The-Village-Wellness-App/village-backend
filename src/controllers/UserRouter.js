@@ -199,15 +199,26 @@ userRouter.patch(
   },
 );
 
-// DELETE specific user
-// TODO: for Brando
-// hey Brando, this should be an easy one to start
-// using userRouter.delete() 
-// and using the same structure of async/await
-// and checking the user is logged in
-// similar to the above methods
-// try giving the user the ability to delete their own account
-// we can implement an admin deleting someone else's account feature later
+
+// User DELETE Account /users/:userId
+userRouter.delete(
+  "/:userId",
+  checkForUserJwt,
+  checkIfUserIsTargetingThemselves,
+  async (request, response) => {
+    try {
+      await UserModel.findByIdAndDelete(request.params.userId);
+      response.json({
+        message: "User account deleted successfully",
+      });
+    } catch (error) {
+      response.status(500).json({ message: "Error deleting user account" });
+    }
+  },
+);
+
+// Admin DELETE User /users/:userId
+// ...
 
 module.exports = {
   userRouter,
