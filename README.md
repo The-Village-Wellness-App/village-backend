@@ -96,4 +96,4 @@
 
 ## Authors
 
-Created by WhiteHotThrash & ✨BeeGeeEss✨
+Created by [WhiteHotThrash](https://github.com/tim-maastricht) & [✨BeeGeeEss✨](https://github.com/BeeGeeEss)
