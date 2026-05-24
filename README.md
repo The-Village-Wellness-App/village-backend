@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./images/banner-dark.png">
   <source media="(prefers-color-scheme: light)" srcset="images/banner-light.png">
-  <img alt="Honey Banner" src="./images/banner-light.png">
+  <img alt="Welcome to the Village Wellness App" src="./images/banner-light.png">
 </picture>
 
 ## Contents
@@ -32,9 +32,9 @@
 
 ## Overview of Project
 
-This backend application was created as part of an academic Web Development assessment using MongoDB, Express, React and Node (MERN). The backend application forms the first assessable task, with the frontend application proposed to be finalised for assessment in June. Please see updates to the  [frontend application.](https://github.com/The-Village-Wellness-App/village-frontend)
+This backend application was created as part of an academic Web Development assessment using MongoDB, Express.js, React and Node.js (MERN Stack). The backend application forms the first assessable task, with the frontend application proposed to be finalised for assessment in June. Please see updates to the  [frontend application.](https://github.com/The-Village-Wellness-App/village-frontend)
 
-Alternatively, visit the projects [profile](https://github.com/The-Village-Wellness-App) for more information.
+Alternatively, visit the project [profile](https://github.com/The-Village-Wellness-App) for more information.
 
 ## Overview of Backend Application
 
@@ -57,9 +57,9 @@ The purpose of this web application is ...
 
 | Technology | Purpose |
 | --- | --- |
-| MongoDB | Stores application data |
+| MongoDB | Stores the applications data |
 | Express.js | Handles API routing and middleware |
-| React | Builds the frontend user interface |
+| React | Builds and handles everything the users see and interact with |
 | Node.js | Runs the backend server environment |
 
 ### Industry Relevance
@@ -98,13 +98,11 @@ See Stack Overflow graphs[*](#references):
 | React | MIT License |
 | Node.js | MIT License |
 
-*Note: Though MongoDB uses an SSPL licence, it is still appropriate to licence the project under MIT. 
+*Note: Though MongoDB uses an SSPL licence, it is still appropriate to licence this project under MIT, because the application:
 
-This project does not require open-source code because it is:
-
-1. For a public educational project
-2. Communicating with MongoDB Atlas as an external managed database service through Mongoose
-3. Does not redistribute or host MongoDB
+1. Is a public educational project
+2. Uses MongoDB as an external database, and connects through Mongoose
+3. Does not redistribute, modify or host MongoDB software
 
 ## Packages
 
@@ -297,6 +295,8 @@ The following scripts can be used for this project:
 ## Deployment
 
 ## Project Style Guide
+
+Please see the [Project Style Guide.]()
 
 ## License
 
