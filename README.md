@@ -8,32 +8,40 @@
 
 - [Overview of Project](#overview-of-project)
 - [Overview of Backend Application](#overview-of-backend-application)
+- [Project Features](#project-features)
 - [Tech Stack](#tech-stack)
-- [Features](#features)
-- [API Endpoints](#api-endpoints)
+- [Packages](#packages)
+- [System Requirements](#system-requirements)
+- [Project Structure](#project-structure)
 - [Database Structure](#database-structure)
 - [Authentication](#authentication)
+- [API Endpoints](#api-endpoints)
+- [Web Request Features](#web-request-features)
+- [Security](#security)
+- [Error Handling](#error-handling)
 - [Installation](#installation)
 - [Environment Variables](#environment-variables)
 - [Running the Server](#running-the-server)
 - [Scripts](#scripts)
 - [Testing](#testing)
-- [Project Structure](#project-structure)
 - [Deployment](#deployment)
-- [Error Handling](#error-handling)
-- [Security](#security)
+- [Project Style Guide](#project-style-guide)
 - [License](#license)
 - [Authors](#authors)
 
 ## Overview of Project
 
-This backend application was created as part of an academic Web Development assessment using MongoDB, Express, React and Node (MERN). The backend application forms the first assessable task, with the frontend application proposed to be finalised for assessment in June. Please see updates to the frontend application [here](https://github.com/The-Village-Wellness-App/village-frontend).
+This backend application was created as part of an academic Web Development assessment using MongoDB, Express, React and Node (MERN). The backend application forms the first assessable task, with the frontend application proposed to be finalised for assessment in June. Please see updates to the  [frontend application.](https://github.com/The-Village-Wellness-App/village-frontend)
 
 Alternatively, visit the projects [profile](https://github.com/The-Village-Wellness-App) for more information.
 
 ## Overview of Backend Application
 
 The purpose of this web application is ...
+
+## Project Features
+
+- Full CRUD operation
 
 ## Tech Stack
 
@@ -42,46 +50,49 @@ The purpose of this web application is ...
 - Node
 - React
 
-## Features
+## Packages
 
-- Full CRUD operation for all entities
+## System Requirements
 
-## API Endpoints
+## Project Structure
 
-### Users
-
-- **GET /users** - Retrieve all users of the app (admin only)
-- **GET /users/userId** - Retrieve a specific user's information (admin only)
-- **GET /users/admin/dashboard** - Retrieve an admins dashboard (admin only)
-- **POST /users/signup** - Create a new user account via the signup page
-- **POST /users/login** - Create a new user login attempt via the login page
-- **PATCH /users/userId** - User makes a request to change information on their profile i.e. theme/email address/name
-- **DELETE /users/userId** - User account deleted from the app
-- **DELETE /users/admin/userID** - Admin user account deleted from the app
-
-### Mood
-
-- **GET /moods** - Retrieve all mood entries
-- **GET /moods/moodId** - Retrieve a specific mood entry
-- **POST /moods** - Create a mood entry
-- **PATCH /moods/moodId** - Update a mood entry
-- **DELETE /moods/moodId** - Delete a mood entry
-
-### Pain
-
-- **GET /pains** - Retrieve all pain entries
-- **GET /pains/painId** - Retrieve a specific pain entry
-- **POST /pains** - Create a pain entry
-- **PATCH /pains/painId** - Update a pain entry
-- **DELETE /pains/painId** - Delete a pain entry
-
-### Events
-
-- **GET /events** - Retrieve all event entries
-- **GET /events/eventId** - Retrieve a specific event entry
-- **POST /events** - Create an event entry
-- **PATCH /events/eventId** - Update an event entry
-- **DELETE /events/eventId** - Delete an event entry
+``` js
+📁 village-backend
+    📁 src
+        📁 controllers
+            ─ EventRouter.js
+            ─ MoodRouter.js
+            ─ PainRouter.js
+            ─ UserRouter.js
+        📁 middleware
+            ─ UserAuthentication.js
+            ─ UserAuthorisation.js
+        📁 models
+            ─ EventModel.js
+            ─ MoodModel.js
+            ─ PainModel.js
+            ─ UserModel.js
+        📁 utils
+            📁 _dev
+                ─ dbSeed.js
+                ─ dbWipe.js
+                ─ envSetup.js
+            ─ dbConnectionManager.js
+            ─ jwtUtils.js
+        ─ index.js
+        ─ server.js
+    📁 tests
+        ─ eventRouter.test.js
+        ─ moodRouter.test.js
+        ─ painRouter.test.js
+        ─ server.test.js
+        ─ userRouter.test.js
+    ─ .env
+    ─ LICENSE
+    ─ package-lock.json
+    ─ package.json
+    ─ README.md
+```
 
 ## Database Structure
 
@@ -151,6 +162,51 @@ This project uses MongoDB as the database
 
 ## Authentication
 
+## API Endpoints
+
+### User Endpoints
+
+- **GET /users** - Retrieve all users of the app (admin only)
+- **GET /users/userId** - Retrieve a specific user's information (admin only)
+- **GET /users/admin/dashboard** - Retrieve an admins dashboard (admin only)
+- **POST /users/signup** - Create a new user account via the signup page
+- **POST /users/login** - Create a new user login attempt via the login page
+- **PATCH /users/userId** - User makes a request to change information on their profile i.e. theme/email address/name
+- **DELETE /users/userId** - User account deleted from the app
+<!--  Is this an endpoint?
+- **DELETE /users/admin/userID** - Admin user account deleted from the app
+-->
+
+### Mood Endpoints
+
+- **GET /moods** - Retrieve all mood entries
+- **GET /moods/moodId** - Retrieve a specific mood entry
+- **POST /moods** - Create a mood entry
+- **PATCH /moods/moodId** - Update a mood entry
+- **DELETE /moods/moodId** - Delete a mood entry
+
+### Pain Endpoints
+
+- **GET /pains** - Retrieve all pain entries
+- **GET /pains/painId** - Retrieve a specific pain entry
+- **POST /pains** - Create a pain entry
+- **PATCH /pains/painId** - Update a pain entry
+- **DELETE /pains/painId** - Delete a pain entry
+
+### Event Endpoints
+
+- **GET /events** - Retrieve all event entries
+- **GET /events/eventId** - Retrieve a specific event entry
+- **POST /events** - Create an event entry
+- **PATCH /events/eventId** - Update an event entry
+- **DELETE /events/eventId** - Delete an event entry
+
+## Web Request Features
+
+## Security
+
+## Error Handling
+
 ## Installation
 
 ## Environment Variables
@@ -171,7 +227,7 @@ SESSION_SECRET=your_session_secret
 The following scripts can be used for this project:
 
 | Script | Description |
-|---|---|
+| --- | --- |
 | `start` | Starts the production server |
 | `dev` | Starts the development server with automatic reloads |
 | `test` | Runs the Jest test suite |
@@ -183,51 +239,9 @@ The following scripts can be used for this project:
 
 ## Testing
 
-## Project Structure
-
-```
-📁 village-backend
-    📁 src
-        📁 controllers
-            ─ EventRouter.js
-            ─ MoodRouter.js
-            ─ PainRouter.js
-            ─ UserRouter.js
-        📁 middleware
-            ─ UserAuthentication.js
-            ─ UserAuthorisation.js
-        📁 models
-            ─ EventModel.js
-            ─ MoodModel.js
-            ─ PainModel.js
-            ─ UserModel.js
-        📁 utils
-            📁 _dev
-                ─ dbSeed.js
-                ─ dbWipe.js
-                ─ envSetup.js
-            ─ dbConnectionManager.js
-            ─ jwtUtils.js
-        ─ index.js
-        ─ server.js
-    📁 tests
-        ─ eventRouter.test.js
-        ─ moodRouter.test.js
-        ─ painRouter.test.js
-        ─ server.test.js
-        ─ userRouter.test.js
-    ─ .env
-    ─ LICENSE
-    ─ package-lock.json
-    ─ package.json
-    ─ README.md
-```
-
 ## Deployment
 
-## Error Handling
-
-## Security
+## Project Style Guide
 
 ## License
 
