@@ -16,7 +16,7 @@
 - [Database Structure](#database-structure)
 - [Authentication](#authentication)
 - [API Endpoints](#api-endpoints)
-- [Web Request Features](#web-request-features)
+- [API Request Handling](#api-request-handling)
 - [Security](#security)
 - [Error Handling](#error-handling)
 - [Installation](#installation)
@@ -27,6 +27,7 @@
 - [Deployment](#deployment)
 - [Project Style Guide](#project-style-guide)
 - [License](#license)
+- [References](#references)
 - [Authors](#authors)
 
 ## Overview of Project
@@ -45,10 +46,65 @@ The purpose of this web application is ...
 
 ## Tech Stack
 
+### Chosen Technologies
+
 - MongoDB
-- Express
-- Node
+- Express.js
 - React
+- Node.js
+
+### Purpose of Each Technology
+
+| Technology | Purpose |
+| --- | --- |
+| MongoDB | Stores application data |
+| Express.js | Handles API routing and middleware |
+| React | Builds the frontend user interface |
+| Node.js | Runs the backend server environment |
+
+### Industry Relevance
+
+The MERN stack is widely used in modern full-stack web development due to its scalability, security, performance and ability to use JavaScript across both frontend and backend development[*](#references). 
+
+The technologies used in the MERN stack are some of the most widely used technologies in present time.
+
+See State of JavaScript graphs[*](#references):
+
+- [React Usage](https://share.devographics.com/share/prerendered?localeId=en-US&surveyId=state_of_js&editionId=js2025&blockId=front_end_frameworks_ratios&params=&sectionId=libraries&subSectionId=front_end_frameworks)
+- [Express Usage](https://share.devographics.com/share/prerendered?localeId=en-US&surveyId=state_of_js&editionId=js2025&blockId=back_end_frameworks_ratios&params=&sectionId=libraries&subSectionId=back_end_frameworks)
+- [Testing with Jest](https://share.devographics.com/share/prerendered?localeId=en-US&surveyId=state_of_js&editionId=js2025&blockId=testing_ratios&params=&sectionId=libraries&subSectionId=testing)
+
+See Stack Overflow graphs[*](#references):
+
+- [MongoDB (No-SQL Databases)](https://survey.stackoverflow.co/2025/technology#most-popular-technologies-database-database)
+- [Node, React, Express Usage](https://survey.stackoverflow.co/2025/technology#most-popular-technologies-webframe-webframe)
+- [Javascript Usage](https://survey.stackoverflow.co/2025/technology#most-popular-technologies-language-language)
+
+### Comparison to Alternative Technologies
+
+| Chosen Technology | Alternative | Reason Chosen |
+| --- | --- | --- |
+| MongoDB | PostgreSQL | Flexible, dynamic, durable, high-performance |
+| Express.js | Django | Minimalist, customisable, JavaScript-based |
+| React | Angular | Component flexibility, rapid development |
+| Node.js | ASP.NET | Universal JavaScript development environment |
+
+### Licensing Information
+
+| Technology | License |
+| --- | --- |
+| MongoDB | Server Side Public License (SSPL) |
+| Express.js | MIT License |
+| React | MIT License |
+| Node.js | MIT License |
+
+*Note: Though MongoDB uses an SSPL licence, it is still appropriate to licence the project under MIT. 
+
+This project does not require open-source code because it is:
+
+1. For a public educational project
+2. Communicating with MongoDB Atlas as an external managed database service through Mongoose
+3. Does not redistribute or host MongoDB
 
 ## Packages
 
@@ -201,7 +257,7 @@ This project uses MongoDB as the database
 - **PATCH /events/eventId** - Update an event entry
 - **DELETE /events/eventId** - Delete an event entry
 
-## Web Request Features
+## API Request Handling
 
 ## Security
 
@@ -235,7 +291,6 @@ The following scripts can be used for this project:
 | `db:seed` | Seeds the database |
 | `db:wipe` | Wipes the database |
 | `db:reset` | Wipes & seeds the database |
-|
 
 ## Testing
 
@@ -245,7 +300,17 @@ The following scripts can be used for this project:
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+
+This project uses third-party technologies including MongoDB, which is licensed under the Server Side Public License (SSPL).
+
+## References
+
+> [MongoDB. (2026). *MERN Stack Explained*. Retrieved May 24, 2026, from https://www.mongodb.com/resources/languages/mern-stack](#tech-stack)
+
+> [State of JavaScript. (2025). *State of JavaScript 2025: Libraries*. Retrieved May 24, 2026, from https://2025.stateofjs.com/en-US/libraries/](#tech-stack)
+
+> [Stack Overflow. (2025). *2025 Developer Survey*. Retrieved May 24, 2026, from https://survey.stackoverflow.co/2025/](#tech-stack)
 
 ## Authors
 
