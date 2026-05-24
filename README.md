@@ -6,7 +6,8 @@
 
 ## Contents
 
-- [Overview](#overview)
+- [Overview of Project](#overview-of-project)
+- [Overview of Backend Application](#overview-of-backend-application)
 - [Tech Stack](#tech-stack)
 - [Features](#features)
 - [API Endpoints](#api-endpoints)
@@ -24,11 +25,26 @@
 - [License](#license)
 - [Authors](#authors)
 
-## Overview
+## Overview of Project
+
+This backend application was created as part of an academic Web Development assessment using MongoDB, Express, React and Node (MERN). The backend application forms the first assessable task, with the frontend application proposed to be finalised for assessment in June. Please see updates to the frontend application [here](https://github.com/The-Village-Wellness-App/village-frontend).
+
+Alternatively, visit the projects [profile](https://github.com/The-Village-Wellness-App) for more information.
+
+## Overview of Backend Application
+
+The purpose of this web application is ...
 
 ## Tech Stack
 
+- MongoDB
+- Express
+- Node
+- React
+
 ## Features
+
+- Full CRUD operation for all entities
 
 ## API Endpoints
 
