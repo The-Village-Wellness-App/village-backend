@@ -4,9 +4,10 @@
   <img alt="Welcome to the Village Wellness App" src="./images/banner-light.png">
 </picture>
 
-## Contents
+## Navigation
 
 - [Overview of Project](#overview-of-project)
+- [The Village Wellness App](#the-village-wellness-app)
 - [Overview of Backend Application](#overview-of-backend-application)
 - [Project Features](#project-features)
 - [Tech Stack](#tech-stack)
@@ -36,9 +37,16 @@ This backend application was created as part of an academic Web Development asse
 
 Alternatively, visit the project [profile](https://github.com/The-Village-Wellness-App) for more information.
 
+## The Village Wellness App
+
+The Village Wellness App is a web-based health and wellbeing tracking application designed to help users monitor changes in their mood and physical pain over time. The application allows users to record structured entries using rating scales select predefined labels that describe their emotional or physical state, and optionally add contextual notes.
+These entries are then visualised through time-based graphs, enabling users to identify patterns or trends in their wellbeing.
+
+The application also allows users to add event markers to their timeline, such as starting a new medication, beginning therapy, or experiencing a significant life event. These markers provide additional context that may help users understand potential factors influencing their mood or pain levels. By combining structured tracking with visualisation tools, The Village Wellness App aims to support self-reflection and provide users with useful insights that may assist discussions with healthcare professionals.
+
 ## Overview of Backend Application
 
-The purpose of this web application is ...
+Placeholder
 
 ## Project Features
 
@@ -64,7 +72,7 @@ The purpose of this web application is ...
 
 ### Industry Relevance
 
-The MERN stack is widely used in modern full-stack web development due to its scalability, security, performance and ability to use JavaScript across both frontend and backend development[*](#references). 
+The MERN stack is widely used in modern full-stack web development due to its scalability, security, performance and ability to use JavaScript across both frontend and backend development[*](#references).
 
 The technologies used in the MERN stack are some of the most widely used technologies in present time.
 
@@ -106,7 +114,27 @@ See Stack Overflow graphs[*](#references):
 
 ## Packages
 
+<!--  Placeholder information -->
+
+```js
+"cors": "^2.8.6",
+"dotenv": "^17.4.2",
+"express": "^5.2.1",
+"express-validator": "^7.3.1",
+"helmet": "^8.1.0",
+"jsonwebtoken": "^9.0.3",
+"mongoose": "^9.3.0",
+"smallog": "^1.0.2"
+
+devDependencies
+
+"jest": "^30.3.0",
+"supertest": "^7.2.2"
+```
+
 ## System Requirements
+
+Placeholder
 
 ## Project Structure
 
@@ -216,7 +244,11 @@ This project uses MongoDB as the database
 
 ## Authentication
 
+Placeholder
+
 ## API Endpoints
+
+Placeholder
 
 ### User Endpoints
 
@@ -257,11 +289,19 @@ This project uses MongoDB as the database
 
 ## API Request Handling
 
+Placeholder
+
 ## Security
+
+Placeholder
 
 ## Error Handling
 
+Placeholder
+
 ## Installation
+
+Placeholder
 
 ## Environment Variables
 
@@ -275,6 +315,8 @@ SESSION_SECRET=your_session_secret
 ```
 
 ## Running the Server
+
+Placeholder
 
 ## Scripts
 
@@ -292,11 +334,15 @@ The following scripts can be used for this project:
 
 ## Testing
 
+Placeholder
+
 ## Deployment
+
+Placeholder
 
 ## Project Style Guide
 
-Please see the [Project Style Guide.]()
+Please see the [Project Style Guide.](https://github.com/The-Village-Wellness-App/.github/blob/main/profile/JavaScriptStyleGuide.md)
 
 ## License
 
