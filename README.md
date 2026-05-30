@@ -26,7 +26,7 @@
 - [Scripts](#scripts)
 - [Testing](#testing)
 - [Deployment](#deployment)
-- [Project Style Guide](#project-style-guide)
+- [JavaScript Style Guide](#javascript-style-guide)
 - [License](#license)
 - [References](#references)
 - [Authors](#authors)
@@ -340,9 +340,9 @@ Placeholder
 
 Placeholder
 
-## Project Style Guide
+## JavaScript Style Guide
 
-Please see the [Project Style Guide.](https://github.com/The-Village-Wellness-App/.github/blob/main/profile/JavaScriptStyleGuide.md)
+[Click: Project Style Guide.](https://github.com/The-Village-Wellness-App/village-documentation/blob/main/JavaScriptStyleGuide.md)
 
 ## License
 
