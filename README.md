@@ -342,7 +342,7 @@ Placeholder
 
 ## JavaScript Style Guide
 
-[Click: Project Style Guide.](https://github.com/The-Village-Wellness-App/village-documentation/blob/main/JavaScriptStyleGuide.md)
+[Click: JavaScript Style Guide](https://github.com/The-Village-Wellness-App/village-documentation/blob/main/javascript-style-guide.md)
 
 ## License
 
