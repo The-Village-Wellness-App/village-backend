@@ -46,7 +46,7 @@ The application also allows users to add event markers to their timeline, such a
 
 ## Overview of Backend Application
 
-Placeholder
+This repository implements the backend API for The Village Wellness App. It exposes RESTful CRUD endpoints for users, moods, pains and events using Express.js, persists data with MongoDB via Mongoose, and secures access with JWT-based authentication.
 
 ## Project Features
 
@@ -120,7 +120,6 @@ See Stack Overflow graphs[*](#references):
 "cors": "^2.8.6",
 "dotenv": "^17.4.2",
 "express": "^5.2.1",
-"express-validator": "^7.3.1",
 "helmet": "^8.1.0",
 "jsonwebtoken": "^9.0.3",
 "mongoose": "^9.3.0",
@@ -128,13 +127,18 @@ See Stack Overflow graphs[*](#references):
 
 devDependencies
 
+"eslint": "^9.39.4",
+"globals": "^17.6.0",
 "jest": "^30.3.0",
 "supertest": "^7.2.2"
 ```
 
 ## System Requirements
 
-Placeholder
+- Node.js (LTS recommended, v16+)
+- npm
+- A MongoDB database (Atlas or self-hosted)
+- Recommended: 512MB+ RAM for small deployments
 
 ## Project Structure
 
@@ -170,6 +174,9 @@ Placeholder
         ─ server.test.js
         ─ userRouter.test.js
     ─ .env
+    – .eslintrc.json
+    – eslint.config.mjs
+    – jest.config.js
     ─ LICENSE
     ─ package-lock.json
     ─ package.json
@@ -244,11 +251,24 @@ This project uses MongoDB as the database
 
 ## Authentication
 
-Placeholder
+Authentication uses JSON Web Tokens (JWT). Clients send tokens in the `Authorization` header as `Bearer <token>`. Tokens are issued on signup/login and validated by `src/utils/jwtUtils.js` with a 7-day expiry. Secrets are read from environment variables.
 
 ## API Endpoints
 
-Placeholder
+Quick overview:
+
+- **Authorization:** send `Authorization: Bearer <token>` for protected endpoints (all `/moods`, `/pains`, `/events`, and most `/users/*` except `/signup` and `/login`).
+- **Admin-only:** `GET /users`, `GET /users/:userId`, `GET /users/admin/dashboard` require an admin user.
+- **Params & queries:** use route params (`:userId`, `:moodId`, `:eventId`) and optional query filters, e.g. `?startDate=2026-05-01&endDate=2026-05-31`.
+- **Responses:** `201` on create, `200` on success, `400/401/403/404/500` for errors as appropriate.
+- **Example (login):**
+
+```bash
+curl -X POST http://localhost:3000/users/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"password123"}'
+```
+
 
 ### User Endpoints
 
@@ -259,9 +279,7 @@ Placeholder
 - **POST /users/login** - Create a new user login attempt via the login page
 - **PATCH /users/userId** - User makes a request to change information on their profile i.e. theme/email address/name
 - **DELETE /users/userId** - User account deleted from the app
-<!--  Is this an endpoint?
-- **DELETE /users/admin/userID** - Admin user account deleted from the app
--->
+- **DELETE /users/:userId/admin** - Admin deletes another user's account (admin only)
 
 ### Mood Endpoints
 
@@ -289,34 +307,52 @@ Placeholder
 
 ## API Request Handling
 
-Placeholder
+- Requests and responses use JSON bodies.
+- Route parameters (`:userId`, `:moodId`, etc.) and query parameters (e.g. `startDate` / `endDate`) are used for resource selection and filtering.
+- Authorization is enforced by middleware that reads `Authorization` headers and attaches the authenticated user to `request.customData.user`.
+- Input is validated at the route and model level; Mongoose schemas enforce field constraints.
 
 ## Security
 
-Placeholder
+- `helmet` is used to set secure HTTP headers.
+- CORS is configured to restrict origins; adjust `src/server.js` `handyCorsConfig` for production domains.
+- Passwords are salted and hashed using `scrypt` (see `UserModel`).
+- Store `JWT_SECRET` and database credentials in environment variables and run the service behind HTTPS.
 
 ## Error Handling
 
-Placeholder
+Routes return appropriate HTTP status codes: `400` for bad requests/validation errors, `401` for authentication failures, `403` for forbidden actions, `404` for not found, and `500` for server errors. Sensitive error details are not exposed to clients.
 
 ## Installation
 
-Placeholder
+Clone, install, and create env file, then run locally:
+
+```bash
+git clone https://github.com/The-Village-Wellness-App/village-backend.git
+cd village-backend
+npm install
+npm run setup:env
+npm run db:seed
+npm run start   # or `npm run dev` for hot-reloading
+```
 
 ## Environment Variables
 
 To run this project, create an `.env` file in the root directory by running `setup:env`
 
 ```env
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-SESSION_SECRET=your_session_secret
+PORT=3000
+DATABASE_URL=mongodb+srv://
+JWT_SECRET=
 ```
 
 ## Running the Server
 
-Placeholder
+Run the production server by entering into the terminal
+```npm run start```
+
+Or if you want hot-reloading, run dev mode
+```npm run dev```
 
 ## Scripts
 
@@ -324,6 +360,7 @@ The following scripts can be used for this project:
 
 | Script | Description |
 | --- | --- |
+| `lint` | Formats JavaScript code to ESLint standards |
 | `start` | Starts the production server |
 | `dev` | Starts the development server with automatic reloads |
 | `test` | Runs the Jest test suite |
@@ -334,15 +371,26 @@ The following scripts can be used for this project:
 
 ## Testing
 
-Placeholder
+The user can run test files individually by running, for example
+```npm run test userRouter.test.js```
+
+Or by running all suites
+```npm run test```
 
 ## Deployment
 
-Placeholder
+This app can be deployed to any Node hosting (Render, Heroku, etc.). Set environment variables (`PORT`, `DATABASE_URL`/`MONGO_URI`, `JWT_SECRET`) in the host dashboard and use `npm run start` as the start command.
 
 ## JavaScript Style Guide
 
-[Click: JavaScript Style Guide](https://github.com/The-Village-Wellness-App/village-documentation/blob/main/javascript-style-guide.md)
+This project uses **ESLint** with the `eslint:recommended` configuration to enforce consistent code style. ESLint is configured for Node.js environments and Jest testing.
+
+To check code style:
+```bash
+npm run lint
+```
+
+For more information on ESLint, visit [ESLint Documentation](https://eslint.org/).
 
 ## License
 

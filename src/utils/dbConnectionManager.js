@@ -15,7 +15,8 @@ try {
 
 async function dbConnect() {
   let dbUrl = process.env.DATABASE_URL;
-  log(dbUrl);
+  const url = new URL(dbUrl);
+  log(`DB host: ${url.host}`);
   log("Connected");
 
   // workaround is to modify expected dns servers

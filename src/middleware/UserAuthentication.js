@@ -16,7 +16,7 @@ async function checkForUserJwt (request, response, next) {
     })
   }
 	bearerToken = bearerToken.substring(7);
-	log(bearerToken); // this is very insecure, use for testing only
+	// log(bearerToken); // this is very insecure, use for testing only
 
 	try {
 		// Pass the provided token into our verify function
