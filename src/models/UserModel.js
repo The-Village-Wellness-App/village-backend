@@ -37,6 +37,14 @@ const UserSchema = new mongoose.Schema(
       required: true,
       default: generateSalt,
     },
+    resetPasswordToken: {
+      type: String,
+      required: false,
+    },
+    resetPasswordExpires: {
+      type: Date,
+      required: false,
+    },
   },
   {
     timestamps: true,
@@ -75,20 +83,16 @@ UserSchema.methods.comparePassword = function (incomingPasswordToCheck) {
     this.salt = generateSalt();
   }
 
-  // Can't compare as-is,
-  // because this.password is hashed and incomingPassword is not hashed
   // if (incomingPasswordToCheck == this.password)
-  // We need to hash incomingPasswordToCheck and see if the hashed version matches!
+  // we need to hash incomingPasswordToCheck and see if the hashed version matches
 
   let hashedAndSaltedIncomingPassword = crypto
     .scryptSync(incomingPasswordToCheck, this.salt, 64)
     .toString("hex");
 
   if (hashedAndSaltedIncomingPassword == this.password) {
-    // passwords match!
     return true;
   } else {
-    // passwords do NOT match!
     return false;
   }
 };
