@@ -121,8 +121,6 @@ See Stack Overflow graphs[*](#references):
 
 ## Packages
 
-<!--  Placeholder information -->
-
 ```js
 "cors": "^2.8.6",
 "dotenv": "^17.4.2",
@@ -260,12 +258,16 @@ This project uses MongoDB as the database
 
 Authentication uses JSON Web Tokens (JWT). Clients send tokens in the `Authorization` header as `Bearer <token>`. Tokens are issued on signup/login and validated by `src/utils/jwtUtils.js` with a 7-day expiry. Secrets are read from environment variables.
 
+Admin users are not created through the public signup endpoint. Admin accounts must be added directly in the database seed data or created by inserting a user document with `isAdmin: true` into MongoDB.
+
+Password reset flow: the backend exposes endpoints to support a standard "forgot password" flow. Clients should call `POST /users/forgot-password` with an email to initiate a reset; the server will create a short-lived reset token and (in production) send it to the JSON response body. To complete a reset the client calls `POST /users/reset-password` with the token and new password. The server validates the token and updates the hashed password.
+
 ## API Endpoints
 
 Quick overview:
 
-- **Authorization:** send `Authorization: Bearer <token>` for protected endpoints (all `/moods`, `/pains`, `/events`, and most `/users/*` except `/signup` and `/login`).
-- **Admin-only:** `GET /users`, `GET /users/:userId`, `GET /users/admin/dashboard` require an admin user.
+ - **Authorization:** send `Authorization: Bearer <token>` for protected endpoints (all `/moods`, `/pains`, `/events`, and most `/users/*` except `/signup` and `/login`).
+ - **Admin-only:** `GET /users`, `GET /users/admin/dashboard` require an admin user. Admin can also find specific user `GET /users/:userId`.
 - **Params & queries:** use route params (`:userId`, `:moodId`, `:eventId`) and optional query filters, e.g. `?startDate=2026-05-01&endDate=2026-05-31`.
 - **Responses:** `201` on create, `200` on success, `400/401/403/404/500` for errors as appropriate.
 - **Example (login):**
@@ -278,15 +280,18 @@ curl -X POST http://localhost:3000/users/login \
 
 
 ### User Endpoints
+ - **GET /users** — Admin only: retrieve all users
+ - **GET /users/:userId** — Admin or the user themself: retrieve a user's profile (password/salt omitted)
+ - **GET /users/admin/dashboard** — Admin only: admin dashboard data
+ - **POST /users/signup** — Public: create a new account
+ - **POST /users/login** — Public: obtain JWT for login
+ - **PATCH /users/:userId** — Authenticated user (self-only): update own profile (username, email, password, theme)
+ - **DELETE /users/:userId** — Authenticated user (self-only): delete own account
+ - **DELETE /users/:userId/admin** — Admin only: delete another user's account (admins may also use with their own ID)
+ - **POST /users/forgot-password** — Public: initiate password reset with `{ email }`; server generates a short-lived token and sends it by email (token not returned in API responses)
+ - **POST /users/reset-password** — Public: complete reset with `{ token, password }`; server validates token and updates hashed password
 
-- **GET /users** - Retrieve all users of the app (admin only)
-- **GET /users/userId** - Retrieve a specific user's information (admin only)
-- **GET /users/admin/dashboard** - Retrieve an admins dashboard (admin only)
-- **POST /users/signup** - Create a new user account via the signup page
-- **POST /users/login** - Create a new user login attempt via the login page
-- **PATCH /users/userId** - User makes a request to change information on their profile i.e. theme/email address/name
-- **DELETE /users/userId** - User account deleted from the app
-- **DELETE /users/:userId/admin** - Admin deletes another user's account (admin only)
+Note: the `forgot-password` flow is email/token-based so users do not need to provide their internal MongoDB `_id`. There is no admin-only reset endpoint implemented by default. Admins who need to reset a user's password must perform the change directly in the database/seed data.
 
 ### Mood Endpoints
 

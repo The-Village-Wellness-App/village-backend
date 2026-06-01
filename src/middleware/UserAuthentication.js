@@ -16,14 +16,12 @@ async function checkForUserJwt (request, response, next) {
     })
   }
 	bearerToken = bearerToken.substring(7);
-	// log(bearerToken); // this is very insecure, use for testing only
 
 	try {
 		// Pass the provided token into our verify function
 		let decodedToken = verifyJwt(bearerToken);
 		// if we haven't thrown an error by this line,
 		// the user is logged in and allowed to proceed
-		log(decodedToken); // this is very insecure, use for testing only
 
 		// Find the user and attach them to the request
 		// let loggedInUser = await UserModel.findById(decodedToken.payload.userId);

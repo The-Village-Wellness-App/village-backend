@@ -7,6 +7,7 @@ const { checkForUserJwt } = require("../middleware/UserAuthentication.js");
 const { UserModel } = require("../models/UserModel.js");
 const { generateJwt } = require("../utils/jwtUtils.js");
 const userRouter = express.Router();
+const crypto = require("node:crypto");
 
 // localhost:3000/users/admin/dashboard
 userRouter.get(
@@ -65,9 +66,18 @@ userRouter.get(
 userRouter.get(
   "/:userId",
   checkForUserJwt,
-  checkIfUserIsAdmin,
   async (request, response) => {
     try {
+      // allow if user is viewing themselves OR if user is admin
+      const isOwnProfile = request.customData.user._id == request.params.userId;
+      const isAdmin = request.customData.user.isAdmin;
+      
+      if (!isOwnProfile && !isAdmin) {
+        return response.status(403).json({ 
+          message: "You can only view your own profile" 
+        });
+      }
+
       const user = await UserModel.findById(request.params.userId, {
         password: 0,
         salt: 0,
@@ -78,9 +88,7 @@ userRouter.get(
         return response.status(404).json({ message: "User not found" });
       }
 
-      response.json({
-        data: user,
-      });
+      response.json({ data: user });
     } catch (error) {
       if (error.name === "CastError") {
         return response.status(400).json({ message: "Invalid user ID" });
@@ -203,20 +211,42 @@ userRouter.patch(
   checkForUserJwt,
   checkIfUserIsTargetingThemselves,
   async (request, response) => {
-    let updatedUser = await UserModel.findOneAndUpdate(
-      // arg 1 the search query/ filter
-      {
-        _id: request.customData.user._id,
-      },
-      // arg 2 the data to apply to the doc to update it
-      {
-        ...request.body,
-      },
-    );
-    response.json({
-      data: updatedUser,
-      message: "Update successful",
-    });
+    try {
+      const allowedFields = ["username", "email", "password", "theme"];
+      const updates = {};
+
+      allowedFields.forEach((field) => {
+        if (Object.prototype.hasOwnProperty.call(request.body, field)) {
+          updates[field] = request.body[field];
+        }
+      });
+
+      if (Object.keys(updates).length === 0) {
+        return response.status(400).json({
+          message: "No valid fields provided for update",
+        });
+      }
+
+      const user = await UserModel.findById(request.customData.user._id);
+      if (!user) {
+        return response.status(404).json({ message: "User not found" });
+      }
+
+      Object.assign(user, updates);
+      await user.save();
+
+      const userResponse = user.toObject();
+      delete userResponse.password;
+      delete userResponse.salt;
+      delete userResponse.__v;
+
+      response.json({
+        data: userResponse,
+        message: "Update successful",
+      });
+    } catch (error) {
+      response.status(500).json({ message: "Error updating user" });
+    }
   },
 );
 
@@ -259,6 +289,65 @@ userRouter.delete(
     }
   },
 );
+
+// if user forgets their password, or wants to reset their password
+// we will leave it in the user's power to reset it themselves
+// instead of asking an admin for support
+function createResetToken() {
+  return crypto.randomBytes(32).toString("hex");
+}
+
+userRouter.post("/forgot-password", async (request, response) => {
+  const { email } = request.body;
+  if (!email) {
+    return response.status(400).json({ message: "Email is required" });
+  }
+
+  const user = await UserModel.findOne({ email: email.toLowerCase().trim() });
+  if (!user) {
+    return response.status(200).json({
+      message: "If that email exists, reset instructions will be sent.",
+    });
+  }
+
+  user.resetPasswordToken = createResetToken();
+  user.resetPasswordExpires = Date.now() + 60 * 60 * 1000; // user has 1 hour before token expiry
+  await user.save();
+
+  // TODO: send user.resetPasswordToken to the user's email.
+
+  return response.status(200).json({
+    message: "Password reset token provided",
+    resetToken: user.resetPasswordToken, // this is highly insecure, but free
+  });
+});
+
+userRouter.post("/reset-password", async (request, response) => {
+  const { token, password } = request.body;
+  if (!token || !password) {
+    return response
+      .status(400)
+      .json({ message: "Token and new password are required" });
+  }
+
+  const user = await UserModel.findOne({
+    resetPasswordToken: token,
+    resetPasswordExpires: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    return response
+      .status(400)
+      .json({ message: "Invalid or expired reset token" });
+  }
+
+  user.password = password;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpires = undefined;
+  await user.save();
+
+  return response.status(200).json({ message: "Password reset successful" });
+});
 
 module.exports = {
   userRouter,
