@@ -50,7 +50,14 @@ This repository implements the backend API for The Village Wellness App. It expo
 
 ## Project Features
 
-- Full CRUD operation
+- Full CRUD operations for users, moods, pains, and events
+- JWT-based authentication with 7-day token expiry
+- Role-based authorization (admin and regular user roles)
+- Date-range filtering for mood and pain entries
+- Secure password hashing with scrypt and salt
+- Comprehensive test coverage (5 test suites across routers)
+- Input validation at model and route levels
+- Consistent error handling with appropriate HTTP status codes
 
 ## Tech Stack
 
