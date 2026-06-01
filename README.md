@@ -329,7 +329,7 @@ Note: the `forgot-password` flow is email/token-based so users do not need to pr
 - `helmet` is used to set secure HTTP headers.
 - CORS is configured to restrict origins; adjust `src/server.js` `handyCorsConfig` for production domains.
 - Passwords are salted and hashed using `scrypt` (see `UserModel`).
-- Store `JWT_SECRET` and database credentials in environment variables and run the service behind HTTPS.
+- Store `JWT_SECRET_KEY` and database credentials in environment variables and run the service behind HTTPS.
 
 ## Error Handling
 
@@ -355,7 +355,7 @@ To run this project, create an `.env` file in the root directory by running `set
 ```env
 PORT=3000
 DATABASE_URL=mongodb+srv://
-JWT_SECRET=
+JWT_SECRET_KEY=
 ```
 
 ## Running the Server
@@ -391,7 +391,7 @@ Or by running all suites
 
 ## Deployment
 
-This app can be deployed to any Node hosting (Render, Heroku, etc.). Set environment variables (`PORT`, `DATABASE_URL`/`MONGO_URI`, `JWT_SECRET`) in the host dashboard and use `npm run start` as the start command.
+This app can be deployed to any Node hosting (Render, Heroku, etc.). Set environment variables (`PORT`, `DATABASE_URL`/`MONGO_URI`, `JWT_SECRET_KEY`) in the host dashboard and use `npm run start` as the start command.
 
 ## JavaScript Style Guide
 
