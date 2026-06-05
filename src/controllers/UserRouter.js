@@ -314,8 +314,6 @@ userRouter.post("/forgot-password", async (request, response) => {
   user.resetPasswordExpires = Date.now() + 60 * 60 * 1000; // user has 1 hour before token expiry
   await user.save();
 
-  // TODO: send user.resetPasswordToken to the user's email.
-
   return response.status(200).json({
     message: "Password reset token provided",
     resetToken: user.resetPasswordToken, // this is highly insecure, but free
