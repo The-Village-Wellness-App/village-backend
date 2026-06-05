@@ -402,7 +402,9 @@ To check code style:
 npm run lint
 ```
 
-For more information on ESLint, visit [ESLint Documentation](https://eslint.org/).
+For more information on ESLint - [Click: ESLint Documentation.](https://eslint.org/)
+
+For this project's internal Style Guide - [Click: JavaScript Style Guide.](https://github.com/The-Village-Wellness-App/village-documentation/blob/main/javascript-style-guide.md)
 
 ## License
 
