@@ -1,12 +1,10 @@
 const { UserModel } = require("../models/UserModel");
 const { verifyJwt } = require("../utils/jwtUtils");
-const log = require('smallog');
 
 async function checkForUserJwt (request, response, next) {
 	// Read the Authorization header from the incoming request
 	// Because the frontend should've put the auth token in a header
 	let bearerToken = request.headers["authorization"];
-	log(request.headers);
 
 	// Server receives "Bearer aoljscvnsalognsldgksndgslkn"
 	// To have a usable token variable, remove "Bearer " from the auth header
@@ -24,7 +22,6 @@ async function checkForUserJwt (request, response, next) {
 		// the user is logged in and allowed to proceed
 
 		// Find the user and attach them to the request
-		// let loggedInUser = await UserModel.findById(decodedToken.payload.userId);
     let loggedInUser = await UserModel.findById(decodedToken.userId);
 
 		request.customData.user = loggedInUser;
